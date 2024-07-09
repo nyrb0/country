@@ -19,14 +19,15 @@ async function getCountryBordersByName(name: string) {
     (country: Country) => country.name.common === name
   )!;
   return country.borders?.map((border) => {
-    const borderCountry = countries.find((country) => country.cca3 === border)!
+    const borderCountry = countries.find((country) => country.cca3 === border)!;
+
     return {
-        name: borderCountry.name.common,
-        rusName: borderCountry.translations.rus.common,
-        flag: borderCountry.flags.svg,
-        flagAlt: borderCountry.flags.alt, 
-    }
-  })
+      name: borderCountry.name.common,
+      rusName: borderCountry.translations.rus.common,
+      flag: borderCountry.flags.svg,
+      flagAlt: borderCountry.flags.alt,
+    };
+  });
 }
 
 async function CountryDetail({
@@ -36,7 +37,7 @@ async function CountryDetail({
 }) {
   const country = await getCountryByName(name);
   const borderCountries = await getCountryBordersByName(decodeURI(name));
-  const formatter = Intl.NumberFormat("rus", { notation: "compact" });
+  const { format } = Intl.NumberFormat("rus", { notation: "compact" });
   return (
     <section className="flex flex-col container">
       <h1 className="text-5xl font-bold text-center text-gray-800 mt-16">
@@ -58,7 +59,7 @@ async function CountryDetail({
             {country.region} {country.subregion && `- ${country.subregion}`}
           </h2>
           <h2 className="text-xl text-gray-800 mt-3">
-            <b>👨‍👩‍👧‍👦 Население: </b> {formatter.format(country.population)}
+            <b>👨‍👩‍👧‍👦 Население: </b> {format(country.population)}
           </h2>
           {country.languages && (
             <h2 className="text-xl text-gray-800 mt-3">
@@ -80,13 +81,13 @@ async function CountryDetail({
       </article>
 
       <section>
-      <h3 className="mt-12 text-2xl font-semibold text-gray-800">
+        <h3 className="mt-12 text-2xl font-semibold text-gray-800">
           Neighbour countries
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full container gap-2">
-                {borderCountries?.map((border) =>(
-                    <CountryCard key={border.name} {...border} />
-                ))}
+          {borderCountries?.map((border) => (
+            <CountryCard key={border.name} {...border} />
+          ))}
         </div>
       </section>
     </section>

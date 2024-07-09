@@ -19,16 +19,9 @@ export default function CountryCard({
         key={name}
       >
         <div className="relative w-full h-40 p-2 overflow-hidden rounded-xl">
-          <Image
-            src={flag}
-            alt={flagAlt}
-            fill
-            className="object-cover"
-          />
+          <Image src={flag} alt={"fdvsd"} fill className="object-cover" />
         </div>
-        <h1 className="font-bold text-xl text-center mt-1">
-          {rusName}
-        </h1>
+        <h1 className="font-bold text-xl text-center mt-1">{rusName}</h1>
       </article>
     </Link>
   );

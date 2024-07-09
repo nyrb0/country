@@ -25,7 +25,7 @@ export default function RootLayout({
               <h1 className="font-bold text-2xl">Countries App</h1>
             </section>
           </nav>
-        {children}
+          {children}
         </main>
       </body>
     </html>
